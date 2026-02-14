@@ -1,0 +1,42 @@
+{
+    "name": "rohitshakya/laravel-beacon",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "RohitShakya\\Beacon\\": "src/"
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RohitShakya\\Beacon\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0|^11.0",
+        "illuminate/notifications": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RohitShakya\\Beacon\\BeaconServiceProvider"
+            ],
+            "aliases": {
+                "Beacon": "RohitShakya\\Beacon\\Facades\\Beacon"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,45 @@
+# ========================
+# Composer
+# ========================
+/vendor/
+composer.lock
+
+# PHPUnit
+.phpunit.result.cache
+coverage/
+
+# IDE
+/.idea/
+/.vscode/
+/*.sublime-project
+/*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node (if you later add assets)
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+
+# Laravel testbench temp files
+/.phpunit.cache
+.phpunit.cache/
+
+# Pest / PHPStan (future safe)
+.phpstan/
+.baseline.neon
+
+# Environment
+.env
+.env.testing
+
+# Misc
+*.cache
+*.tmp
