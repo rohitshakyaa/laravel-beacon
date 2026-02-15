@@ -1,0 +1,1 @@
+<livewire:beacon.topbar />

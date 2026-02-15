@@ -40,6 +40,10 @@ class Topbar extends Component
 
     public function render(): View
     {
-        return view(config('beacon.views.topbar', 'beacon::topbar.default'));
+        if (config('beacon.topbar.driver') === 'livewire') {
+            return view('beacon::topbar.livewire-mount');
+        }
+
+        return view(config('beacon.topbar.view', 'beacon::topbar.default'));
     }
 }
