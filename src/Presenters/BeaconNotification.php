@@ -2,6 +2,7 @@
 
 namespace RohitShakya\Beacon\Presenters;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\DatabaseNotification;
 use RohitShakya\Beacon\Registry\NotificationRegistry;
 
@@ -29,7 +30,6 @@ class BeaconNotification
     public function view(): string
     {
         $def = $this->definition();
-
         // registry view > config fallback
         return $def['view']
             ?? config('beacon.views.item', 'beacon::item.default');
@@ -70,6 +70,14 @@ class BeaconNotification
         return $this->evaluate($icon);
     }
 
+    public function iconClass(): ?string
+    {
+        $def = $this->definition();
+        $icon = $def['icon_class'] ?? ($this->notification->data['icon_class'] ?? null);
+
+        return $this->evaluate($icon);
+    }
+
     public function severity(): string
     {
         $def = $this->definition();
@@ -86,6 +94,11 @@ class BeaconNotification
         $url = $def['url'] ?? $def['route'] ?? ($this->notification->data['url'] ?? null);
 
         return $this->evaluate($url);
+    }
+
+    public function notifiedAt(): string|Carbon|null
+    {
+        return $this->notification->created_at;
     }
 
     /**

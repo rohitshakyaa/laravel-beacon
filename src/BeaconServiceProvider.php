@@ -2,6 +2,7 @@
 
 namespace RohitShakya\Beacon;
 
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use RohitShakya\Beacon\Registry\NotificationRegistry;
@@ -59,6 +60,36 @@ class BeaconServiceProvider extends ServiceProvider
         if (class_exists(\Livewire\Livewire::class)) {
             \Livewire\Livewire::component('beacon.topbar', \RohitShakya\Beacon\Livewire\Topbar::class);
             \Livewire\Livewire::component('beacon.inbox', \RohitShakya\Beacon\Livewire\Inbox::class);
+
+            $this->registerBeaconNotifications();
+        }
+    }
+
+    private function registerBeaconNotifications()
+    {
+        $registry = app(NotificationRegistry::class);
+
+        $items = config('beacon.notifications', []);
+
+        foreach ($items as $type => $definition) {
+            // Turn config route into a callable at runtime
+            if (isset($definition['route']) && is_string($definition['route'])) {
+                $routeName = $definition['route'];
+                $keys = $definition['route_params'] ?? [];
+
+                $definition['route'] = function (DatabaseNotification $n) use ($routeName, $keys) {
+                    $params = [];
+
+                    foreach ($keys as $key) {
+                        $params[$key] = data_get($n->data, $key);
+                    }
+
+                    return route($routeName, $params);
+                };
+            }
+
+            // Optional: if someone sets route as null, keep it null
+            $registry->register($type, $definition);
         }
     }
 }

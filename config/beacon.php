@@ -107,4 +107,16 @@ return [
         'middleware' => ['web', 'auth'],
     ],
 
+    'notifications' => [
+        // \App\Notifications\InvoicePaid::class => [
+        //     'label' => 'Invoice Paid',
+        //     'icon' => 'check-circle',
+        //     'severity' => 'success',
+        //     'view' => 'beacon::notifications.invoice',
+        //     'detail_view' => 'beacon::notifications.invoice-detail',
+        //     'route' => 'invoices.show', // route name (recommended)
+        //     'route_params' => ['invoice_id'], // keys in $notification->data
+        // ],
+    ],
+
 ];

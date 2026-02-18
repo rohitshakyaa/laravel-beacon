@@ -15,6 +15,8 @@ class Topbar extends Component
 
     public bool $open = false;
 
+    public bool $unreadOnly = false;
+
     public function mount(?int $limit = null): void
     {
         $this->limit = $limit ?: (int) config('beacon.topbar.limit', 8);
@@ -52,6 +54,7 @@ class Topbar extends Component
 
         $list = $user->notifications()
             ->latest()
+            ->when($this->unreadOnly, fn($q) => $q->where('read_at', null))
             ->limit($this->limit)
             ->get();
 
