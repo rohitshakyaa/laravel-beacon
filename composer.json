@@ -1,7 +1,7 @@
 {
     "name": "rohitshakya/laravel-beacon",
     "description": "Realtime notification UI for Laravel with topbar dropdown, inbox, and Livewire + Echo support. Fully customizable and production ready.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "license": "MIT",
     "keywords": [
